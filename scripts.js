@@ -9,7 +9,6 @@ function salvarAnotacao() {
         if (!anotacoes[dataHoraFormatada]) {
             anotacoes[dataHoraFormatada] = [];
         }
-        // Substituir os retornos de carro (\n) por <br> para respeitar a quebra de linha
         nota = nota.replace(/\n/g, '<br>');
         anotacoes[dataHoraFormatada].push(nota);
         localStorage.setItem('anotacoes', JSON.stringify(anotacoes));
