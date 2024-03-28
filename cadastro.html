@@ -23,7 +23,6 @@
 
 <script>
 function showLoginForm() {
-    // Redireciona o usuário para a tela de login
     window.location.href = 'login.html';
 }
 
@@ -32,9 +31,6 @@ function signup() {
     var lastName = document.getElementById('lastName').value;
     var country = document.getElementById('country').value;
     var email = document.getElementById('email').value;
-
-    // Aqui você pode adicionar a lógica para cadastrar o usuário
-    // Por exemplo, você pode fazer uma requisição AJAX para o seu backend
     console.log('Cadastro de:', firstName, lastName, country, email);
 }
 </script>
