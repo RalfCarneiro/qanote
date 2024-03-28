@@ -1,0 +1,109 @@
+body {
+    background-color: #282a36;
+    color: #f8f8f2;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    text-align: center;
+}
+
+h4 {
+    text-align: center;
+}
+
+.container {
+    max-width: 586px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 2px solid #6272a4;
+    border-radius: 10px;
+}
+
+textarea {
+    width: calc(100% - 20px); /* Ajustado para incluir as margens */
+    background-color: #44475a;
+    color: #f8f8f2;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    margin-right: 10px; /* Adicionado para alinhar com os botões */
+    resize: vertical; /* Permite redimensionar verticalmente */
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+button {
+    color: #f8f8f2;
+    border: none;
+    padding: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: calc(50% - 5px);
+}
+
+button.salvar {
+    background-color: #38c05a; /* Verde suave */
+}
+
+button.limpar {
+    background-color: #ff5555; /* Vermelho */
+}
+
+.anotacoes {
+    margin-top: 20px;
+}
+
+.anotacao {
+    background-color: #44475a;
+    border: 1px solid #6272a4;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    cursor: pointer; /* Adicionado para o cursor indicar clicabilidade */
+}
+
+.anotacao h3 {
+    color: #ff79c6;
+    margin-top: 0;
+}
+
+.nota {
+    cursor: pointer;
+}
+
+.nota:hover {
+    background-color: #6272a4;
+}
+
+.editando {
+    background-color: #f1fa8c;
+    color: #282a36;
+}
+#close{
+    color: #f8f8f2;
+    background-color: #a693f9;
+    border: none;
+    padding: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: calc(50% - 5px);
+}
+
+@media screen and (max-width: 586px) {
+    .container {
+        width: calc(100% - 40px);
+        margin: 10px auto;
+    }
+
+    textarea, .buttons-container button {
+        width: calc(100% - 20px);
+    }
+}

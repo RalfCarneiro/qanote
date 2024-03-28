@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anotações Diárias</title>
+<style>
+body {
+    background-color: #282a36;
+    color: #f8f8f2;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 586px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 2px solid #6272a4;
+    border-radius: 10px;
+    
+}
+
+textarea {
+    width: calc(100% - 20px); /* Ajustado para incluir as margens */
+    background-color: #44475a;
+    color: #f8f8f2;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    margin-right: 10px; /* Adicionado para alinhar com os botões */
+    resize: vertical; /* Permite redimensionar verticalmente */
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+button {
+    color: #f8f8f2;
+    border: none;
+    padding: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: calc(50% - 5px);
+}
+
+button.salvar {
+    background-color: #38c05a; /* Verde suave */
+}
+
+button.limpar {
+    background-color: #ff5555; /* Vermelho */
+}
+
+.anotacoes {
+    margin-top: 20px;
+}
+
+.anotacao {
+    background-color: #44475a;
+    border: 1px solid #6272a4;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.anotacao h3 {
+    color: #ff79c6;
+    margin-top: 0;
+}
+
+.nota {
+    cursor: pointer;
+}
+
+.nota:hover {
+    background-color: #6272a4;
+}
+
+.editando {
+    background-color: #f1fa8c;
+    color: #282a36;
+}
+
+@media screen and (max-width: 586px) {
+    .container {
+        width: calc(100% - 40px);
+        margin: 10px auto;
+    }
+
+    textarea, .buttons-container button {
+        width: calc(100% - 20px);
+    }
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <h2>A GRATIDÃO É A FORÇA VITAL DE TUDO</h2>
+    <h4>Anotações Diárias - CWS</h4>
+
+    <textarea id="noteText" placeholder="Insira sua anotação diária aqui..."></textarea>
+    <div class="buttons-container">
+        <button class="salvar" onclick="salvarAnotacao()">Salvar</button>
+        <button class="limpar" onclick="limparAnotacoes()">Limpar Anotações</button>
+    </div>
+
+    <div id="anotacoesSalvas" class="anotacoes"></div>
+</div>
+
+<script>
+function salvarAnotacao() {
+    var nota = document.getElementById('noteText').value.trim();
+    if (nota !== '') {
+        var dataAtual = new Date().toLocaleString();
+        var dataHoraFormatada = dataAtual.split(',').join(' -');
+        var anotacoes = JSON.parse(localStorage.getItem('anotacoes')) || {};
+        if (!anotacoes[dataHoraFormatada]) {
+            anotacoes[dataHoraFormatada] = [];
+        }
+        anotacoes[dataHoraFormatada].push(nota);
+        localStorage.setItem('anotacoes', JSON.stringify(anotacoes));
+        exibirAnotacoes();
+        document.getElementById('noteText').value = '';
+    } else {
+        alert('Por favor, insira uma anotação antes de salvar.');
+    }
+}
+
+function exibirAnotacoes() {
+    var anotacoes = JSON.parse(localStorage.getItem('anotacoes')) || {};
+    var datas = Object.keys(anotacoes).sort(function(a, b) {
+        return new Date(a) - new Date(b);
+    });
+
+    var notasHTML = '';
+    for (var i = 0; i < datas.length; i++) {
+        var data = datas[i];
+        notasHTML += '<div class="anotacao">';
+        notasHTML += '<h3>' + data + '</h3>';
+        var horas = anotacoes[data];
+        for (var j = 0; j < horas.length; j++) {
+            var hora = horas[j];
+            notasHTML += '<p class="nota" onclick="editarNota(this)">' + hora + '</p>';
+        }
+        notasHTML += '</div>';
+    }
+    document.getElementById('anotacoesSalvas').innerHTML = notasHTML;
+}
+
+function limparAnotacoes() {
+    localStorage.removeItem('anotacoes');
+    exibirAnotacoes();
+}
+
+function editarNota(elemento) {
+    var notaAntiga = elemento.textContent;
+    elemento.classList.add('editando');
+    var novoConteudo = prompt('Edite sua nota:', notaAntiga);
+    if (novoConteudo !== null && novoConteudo.trim() !== '') {
+        elemento.textContent = novoConteudo.trim();
+        salvarAnotacao();
+    } else {
+        elemento.classList.remove('editando');
+    }
+}
+
+window.onload = exibirAnotacoes;
+</script>
+
+</body>
+</html>

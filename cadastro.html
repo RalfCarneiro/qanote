@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cadastro</title>
+<link rel="stylesheet" href="stylescadastro.css">
+</head>
+<body>
+<div class="container">
+    <div class="form-container">
+        <div id="signupForm">
+            <h2>Cadastro</h2>
+            <input type="text" id="firstName" placeholder="Nome" required>
+            <input type="text" id="lastName" placeholder="Sobrenome" required>
+            <input type="text" id="country" placeholder="País" required>
+            <input type="text" id="email" placeholder="E-mail" required>
+            <button id="Cadastrar" onclick="signup()">Cadastrar</button>
+            <p id="JaTemUmaConta">Já tem uma conta? <a href="#" onclick="showLoginForm()">Faça login</a></p>
+        </div>
+    </div>
+</div>
+
+<script>
+function showLoginForm() {
+    // Redireciona o usuário para a tela de login
+    window.location.href = 'login.html';
+}
+
+function signup() {
+    var firstName = document.getElementById('firstName').value;
+    var lastName = document.getElementById('lastName').value;
+    var country = document.getElementById('country').value;
+    var email = document.getElementById('email').value;
+
+    // Aqui você pode adicionar a lógica para cadastrar o usuário
+    // Por exemplo, você pode fazer uma requisição AJAX para o seu backend
+    console.log('Cadastro de:', firstName, lastName, country, email);
+}
+</script>
+
+</body>
+</html>

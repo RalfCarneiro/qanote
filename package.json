@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "electron": "^29.1.6",
+    "mkdirp": "^3.0.1"
+  },
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron-prebuilt-compile": "8.2.0"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {
+        "platform": "win32" 
+      }
+    }
+  }
+}
